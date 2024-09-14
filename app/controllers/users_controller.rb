@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
   def show
-    @user = User.last
+    @user = User.find_by(id: session[:user_id])
+    if !@user
+      return redirect_to login_path
+    end
   end
 
   def new
